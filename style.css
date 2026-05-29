@@ -118,6 +118,19 @@ body {
 .windows { position: fixed; inset: 28px 0 0 72px; z-index: 10; pointer-events: none; }
 .windows > .window { pointer-events: auto; }
 
+/* ===== Desktop icons (below top bar, right of dock) ===== */
+.desktop-icons { position: fixed; inset: 28px 0 0 72px; z-index: 1; pointer-events: none; }
+.desk-icon {
+  position: absolute; width: 80px; pointer-events: auto;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 7px 4px; background: transparent; border: 1px solid transparent; border-radius: 10px;
+  cursor: pointer; font: inherit; color: #fff; transition: background .1s;
+}
+.desk-icon:hover  { background: rgba(255,255,255,0.16); }
+.desk-icon:active { background: rgba(255,255,255,0.24); }
+.desk-icon-glyph { font-size: 32px; line-height: 1; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.45)); }
+.desk-icon-label { font: 500 12px var(--sans); text-align: center; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.75); max-width: 76px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
 /* ===== Left Ubuntu dock (the chrome "shelf", repositioned) ===== */
 .dock {
   position: fixed; left: 0; top: 28px; bottom: 0; z-index: 30;
