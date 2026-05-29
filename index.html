@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ubuntu — your Solid pod as a GNOME desktop</title>
+<meta name="description" content="A Solid desktop OS dressed as Ubuntu (GNOME / Yaru). Same primitives as solid-apps/chrome — windows, panes, launcher, real-time, pod sync — wrapped in the aubergine desktop, the left dock, and Ubuntu orange." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#1e1e1e">
+<link rel="stylesheet" href="./style.css" />
+<!-- Importmap: external panes (e.g. solid-apps/pilot's tracker-pane) bring
+     Preact/htm with them. Shared here so registry panes load without each
+     bundling its own copy — same set as chrome/win98, so panes are interchangeable. -->
+<script type="importmap">
+{
+  "imports": {
+    "preact":       "https://esm.sh/preact@10.19.0",
+    "preact/hooks": "https://esm.sh/preact@10.19.0/hooks",
+    "htm":          "https://esm.sh/htm@3.1.1"
+  }
+}
+</script>
+</head>
+<body>
+  <div id="wallpaper" aria-hidden="true"></div>
+
+  <!-- GNOME top bar -->
+  <div class="topbar" id="status-tray">
+    <button class="activities" id="activities" title="Activities — show applications (⌘Space)">
+      <span class="dot" aria-hidden="true"></span>Activities
+    </button>
+    <span class="tray-clock" id="tray-clock">—</span>
+    <span class="tray-spacer"></span>
+    <span class="tray-desks" id="tray-desks" title="Workspaces (⌘] / ⌘[)"></span>
+    <button class="tray-pill" id="tray-quick" title="Quick settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M12 2v3M12 19v3M5 5l2 2M17 17l2 2M2 12h3M19 12h3M5 19l2-2M17 7l2-2"/><circle cx="12" cy="12" r="4"/></svg>
+    </button>
+    <button class="tray-pill tray-auth" id="tray-auth" title="Sign in">Sign in</button>
+  </div>
+
+  <div class="windows" id="windows"></div>
+
+  <!-- Left Ubuntu dock -->
+  <div class="dock" id="shelf">
+    <div class="shelf-running" id="shelf-running"></div>
+    <button class="show-apps" id="tray-launcher" title="Show Applications (⌘Space)">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg>
+    </button>
+  </div>
+
+  <!-- xlogin: one-tag auth (Solid OIDC + Nostr), before app.js so its
+       listeners are wired before xlogin emits its first restore event. -->
+  <script src="https://unpkg.com/xlogin"></script>
+  <script type="module" src="./src/app.js"></script>
+  <!-- Ubuntu shell wiring: the top-bar "Activities" opens the same app grid
+       as the dock's show-apps button (which app.js binds as #tray-launcher). -->
+  <script>
+    document.getElementById("activities").addEventListener("click", function () {
+      document.getElementById("tray-launcher").click();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "ubuntu — your Solid pod as a GNOME desktop",
+  "short_name": "ubuntu",
+  "description": "A Solid desktop OS dressed as Ubuntu (GNOME / Yaru) — windows, panes, launcher, real-time, pod sync. Same primitives as chrome and win98.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#2C001E",
+  "theme_color": "#1e1e1e",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
